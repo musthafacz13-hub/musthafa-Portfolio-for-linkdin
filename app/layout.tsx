@@ -5,12 +5,14 @@ export const viewport: Viewport = {
   themeColor: '#FFFFFF',
   width: 'device-width',
   initialScale: 1,
+  maximumScale: 5,
+  viewportFit: 'cover',
 };
 
 export const metadata: Metadata = {
   title: 'Muhammed Musthafa — Junior Web & Mobile App Developer',
   description:
-    'Personal portfolio of Muhammed Musthafa, a degree student and junior developer from Kerala, India specializing in AI-assisted application development.',
+    'Personal portfolio of Muhammed Musthafa, a degree student and junior web and mobile app developer from Kerala, India. Open to internship opportunities.',
   authors: [{ name: 'Muhammed Musthafa' }],
   creator: 'Muhammed Musthafa',
   keywords: [
@@ -19,7 +21,6 @@ export const metadata: Metadata = {
     'Junior Web Developer',
     'Mobile App Developer',
     'Kerala India',
-    'AI-assisted development',
     'React',
     'Next.js',
     'TypeScript',
@@ -29,14 +30,14 @@ export const metadata: Metadata = {
     locale: 'en_US',
     title: 'Muhammed Musthafa — Junior Web & Mobile App Developer',
     description:
-      'Personal portfolio of Muhammed Musthafa, a degree student and junior developer from Kerala, India specializing in AI-assisted application development.',
+      'Personal portfolio of Muhammed Musthafa, a degree student and junior web and mobile app developer from Kerala, India.',
     siteName: 'Muhammed Musthafa Portfolio',
   },
   twitter: {
     card: 'summary',
     title: 'Muhammed Musthafa — Junior Web & Mobile App Developer',
     description:
-      'Personal portfolio of Muhammed Musthafa, a degree student and junior developer from Kerala, India specializing in AI-assisted application development.',
+      'Personal portfolio of Muhammed Musthafa, a degree student and junior web and mobile app developer from Kerala, India.',
   },
 };
 
@@ -48,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
-        className="min-h-screen bg-white text-[#111111] antialiased selection:bg-[#D9FF3A] selection:text-[#111111]"
+        className="min-h-screen bg-white text-[#111111] antialiased selection:bg-[#D9FF3A] selection:text-[#111111] overflow-x-hidden"
         suppressHydrationWarning
       >
         {children}

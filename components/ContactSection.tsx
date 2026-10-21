@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { PORTFOLIO_CONFIG } from '@/lib/portfolio-data';
 import { Mail, ArrowUpRight, Copy, Check } from 'lucide-react';
 
-// Authentic SVG Icons for brand channels
+// Official, recognizable SVG brand icons
 function GithubIcon({ className = 'w-5 h-5' }: { className?: string }) {
   return (
     <svg
@@ -75,34 +75,34 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="scroll-mt-16 border-b border-[#E7E7E4] bg-[#F7F7F5] py-20 sm:py-28"
+      className="scroll-mt-20 border-b border-[#E5E5E5] bg-[#F6F6F4] py-16 sm:py-24"
       aria-labelledby="contact-heading"
     >
-      <div className="mx-auto max-w-6xl px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-widest text-[#666666]">
             05 / CONTACT
           </p>
           <h2
             id="contact-heading"
-            className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-[#111111]"
+            className="mt-3 text-2xl sm:text-4xl font-normal tracking-tight text-[#111111]"
           >
-            Have an idea or an opportunity?
+            Contact
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#666666] leading-relaxed">
-            I'm open to conversations about internships, junior developer opportunities, collaborations, and interesting projects.
+          <p className="mt-4 text-sm sm:text-base text-[#666666] leading-relaxed">
+            Open to conversations regarding internships, junior developer roles, and projects.
           </p>
 
           {/* Primary Email Card with Quick Copy */}
-          <div className="mt-10 p-6 sm:p-8 bg-white border border-[#E7E7E4] rounded-sm">
+          <div className="mt-8 p-5 sm:p-7 bg-white border border-[#E5E5E5] rounded-sm">
             <span className="text-xs font-mono uppercase tracking-wider text-[#666666]">
               Direct Email
             </span>
             <div className="mt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <a
                 href={`mailto:${personal.email}`}
-                className="text-lg sm:text-2xl font-medium text-[#111111] hover:text-[#0245EC] transition-colors break-all"
-                aria-label={`Email ${personal.email}`}
+                className="text-base sm:text-xl font-medium text-[#111111] hover:text-[#0245EC] transition-colors break-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0245EC] rounded-sm"
+                aria-label={`Send email to ${personal.email}`}
               >
                 {personal.email}
               </a>
@@ -110,8 +110,8 @@ export default function ContactSection() {
               <button
                 type="button"
                 onClick={handleCopyEmail}
-                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-medium text-[#111111] bg-[#F7F7F5] hover:bg-[#D9FF3A] border border-[#E7E7E4] rounded-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0245EC] shrink-0"
-                aria-label={copied ? 'Email copied' : 'Copy email to clipboard'}
+                className="inline-flex items-center justify-center gap-2 px-4 py-2.5 text-xs font-medium text-[#111111] bg-[#F6F6F4] hover:bg-[#D9FF3A] border border-[#E5E5E5] rounded-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0245EC] shrink-0 min-h-[44px]"
+                aria-label={copied ? 'Email address copied' : 'Copy email address to clipboard'}
               >
                 {copied ? (
                   <>
@@ -129,40 +129,69 @@ export default function ContactSection() {
           </div>
 
           {/* Contact Channels Grid */}
-          <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {contactChannels.map((channel) => (
-              <a
-                key={channel.name}
-                href={channel.url}
-                target={channel.type === 'email' ? undefined : '_blank'}
-                rel={channel.type === 'email' ? undefined : 'noopener noreferrer'}
-                className="flex items-center justify-between p-4 sm:p-5 bg-white border border-[#E7E7E4] rounded-sm hover:border-[#111111] transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0245EC]"
-                aria-label={channel.actionLabel}
-              >
-                <div className="flex items-center gap-3.5">
-                  <div className="p-2 bg-[#F7F7F5] rounded-sm group-hover:bg-[#D9FF3A]/30 transition-colors">
-                    {renderIcon(channel.type)}
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-medium text-[#111111]">
-                      {channel.name}
-                    </h3>
-                    <p className="text-xs text-[#666666] font-mono mt-0.5">
-                      {channel.handle}
-                    </p>
-                  </div>
-                </div>
+          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {contactChannels.map((channel) => {
+              if (channel.isConfigured && channel.url) {
+                return (
+                  <a
+                    key={channel.name}
+                    href={channel.url}
+                    className="flex items-center justify-between p-4 sm:p-5 bg-white border border-[#E5E5E5] rounded-sm hover:border-[#111111] transition-all group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0245EC] min-h-[44px]"
+                    aria-label={channel.actionLabel}
+                  >
+                    <div className="flex items-center gap-3.5 min-w-0">
+                      <div className="p-2 bg-[#F6F6F4] rounded-sm group-hover:bg-[#D9FF3A]/30 transition-colors shrink-0">
+                        {renderIcon(channel.type)}
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="text-sm font-medium text-[#111111] truncate">
+                          {channel.name}
+                        </h3>
+                        <p className="text-xs text-[#666666] font-mono mt-0.5 truncate">
+                          {channel.handle}
+                        </p>
+                      </div>
+                    </div>
 
-                <ArrowUpRight
-                  className="w-4 h-4 text-[#666666] group-hover:text-[#0245EC] transition-colors"
-                  aria-hidden="true"
-                />
-              </a>
-            ))}
+                    <ArrowUpRight
+                      className="w-4 h-4 text-[#666666] group-hover:text-[#0245EC] transition-colors shrink-0 ml-2"
+                      aria-hidden="true"
+                    />
+                  </a>
+                );
+              }
+
+              // Non-clickable placeholder for unconfigured channels (no fake URLs generated)
+              return (
+                <div
+                  key={channel.name}
+                  className="flex items-center justify-between p-4 sm:p-5 bg-white/70 border border-[#E5E5E5] rounded-sm text-neutral-400 min-h-[44px]"
+                  aria-label={channel.actionLabel}
+                >
+                  <div className="flex items-center gap-3.5 min-w-0">
+                    <div className="p-2 bg-[#F6F6F4] rounded-sm opacity-60 shrink-0">
+                      {renderIcon(channel.type)}
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="text-sm font-medium text-[#111111] truncate">
+                        {channel.name}
+                      </h3>
+                      <p className="text-xs text-[#666666] font-mono mt-0.5 truncate">
+                        {channel.handle}
+                      </p>
+                    </div>
+                  </div>
+
+                  <span className="text-[11px] font-mono uppercase tracking-wider text-[#666666] bg-[#F6F6F4] px-2 py-0.5 border border-[#E5E5E5] rounded-sm shrink-0 ml-2">
+                    Pending
+                  </span>
+                </div>
+              );
+            })}
           </div>
 
-          <p className="mt-8 text-xs text-[#666666]">
-            Based in Kerala, India (IST / UTC+5:30). Open to remote internships and junior roles worldwide.
+          <p className="mt-6 text-xs text-[#666666]">
+            Location: Kerala, India. Open to remote and hybrid opportunities.
           </p>
         </div>
       </div>

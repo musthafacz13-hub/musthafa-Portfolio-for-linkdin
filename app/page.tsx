@@ -8,25 +8,25 @@ import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-[#111111] flex flex-col font-sans selection:bg-[#D9FF3A] selection:text-[#111111]">
+    <div className="min-h-screen bg-white text-[#111111] flex flex-col font-sans selection:bg-[#D9FF3A] selection:text-[#111111] overflow-x-hidden">
       {/* Header & Navigation */}
       <Header />
 
       {/* Main Content Area */}
-      <main className="flex-1">
+      <main className="flex-1 w-full overflow-x-hidden">
         {/* Hero Section */}
         <HeroSection />
 
-        {/* Selected Work & In-Progress Projects */}
+        {/* Projects Section */}
         <ProjectsSection />
 
-        {/* Skills & Tools */}
+        {/* Skills Section */}
         <SkillsSection />
 
-        {/* About & Narrative */}
+        {/* About Section */}
         <AboutSection />
 
-        {/* Contact & Inquiry */}
+        {/* Contact Section */}
         <ContactSection />
       </main>
 

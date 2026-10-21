@@ -12,9 +12,9 @@ export default function Footer() {
   };
 
   return (
-    <footer className="w-full bg-white py-12 border-t border-[#E7E7E4]">
-      <div className="mx-auto max-w-6xl px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+    <footer className="w-full bg-white py-10 sm:py-12 border-t border-[#E5E5E5]">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
           {/* Identity & Location */}
           <div>
             <p className="text-sm font-medium text-[#111111]">
@@ -26,13 +26,13 @@ export default function Footer() {
           </div>
 
           {/* Copyright & Back to Top */}
-          <div className="flex items-center gap-6 text-xs text-[#666666]">
+          <div className="flex items-center gap-4 sm:gap-6 text-xs text-[#666666]">
             <span>© {currentYear} {personal.name}</span>
             <span aria-hidden="true">·</span>
             <button
               type="button"
               onClick={scrollToTop}
-              className="inline-flex items-center gap-1.5 font-medium text-[#111111] hover:text-[#0245EC] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0245EC] py-1"
+              className="inline-flex items-center gap-1.5 font-medium text-[#111111] hover:text-[#0245EC] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0245EC] py-2 px-1 rounded-sm"
               aria-label="Scroll back to top of page"
             >
               <span>Back to top</span>
