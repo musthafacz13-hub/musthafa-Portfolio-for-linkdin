@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  --color-lime-accent: #D9FF3A;
+  --color-royal-blue: #0245EC;
+  --color-surface-muted: #F7F7F5;
+  --color-border-subtle: #E7E7E4;
+  --color-text-primary: #111111;
+  --color-text-secondary: #666666;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::selection {
+  background-color: #D9FF3A;
+  color: #111111;
+}
