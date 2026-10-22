@@ -1,117 +1,157 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { PORTFOLIO_CONFIG } from '@/lib/portfolio-data';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { personal } = PORTFOLIO_CONFIG;
 
   const navLinks = [
     { label: 'Projects', href: '#projects' },
     { label: 'Skills', href: '#skills' },
     { label: 'About', href: '#about' },
-    { label: 'Contact', href: '#contact' },
   ];
 
+  // Track scroll for subtle height transition like reference navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Close mobile menu on Escape key press
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileMenuOpen]);
+
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
+  const closeMenu = () => setMobileMenuOpen(false);
+
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-[#E5E5E5] bg-white/95 backdrop-blur-md transition-colors">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Brand Wordmark & Availability Notice */}
-        <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
+    <>
+      <header
+        className={`sticky top-0 z-50 w-full transition-all duration-300 border-b border-white/10 ${
+          scrolled
+            ? 'h-16 bg-[#0a0a0a]/90 backdrop-blur-md shadow-[0_5px_20px_rgba(0,0,0,0.5)]'
+            : 'h-20 bg-[#0a0a0a]/80 backdrop-blur-sm'
+        }`}
+      >
+        <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-5 sm:px-8 lg:px-12">
+          {/* Left: Brand Name with Reference Gradient Text */}
           <Link
             href="/"
-            className="text-sm sm:text-base font-semibold tracking-tight text-[#111111] transition-opacity hover:opacity-75 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0245EC] rounded-sm truncate"
+            onClick={closeMenu}
+            className="text-lg sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-[#00d2ff] via-[#3a7bd5] to-[#0245EC] bg-clip-text text-transparent hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d2ff] rounded-sm"
             aria-label={`${personal.name} home`}
           >
             {personal.name}
           </Link>
-          <span
-            className="hidden text-xs text-[#666666] sm:inline-block shrink-0"
-            aria-hidden="true"
+
+          {/* Desktop Navigation Links */}
+          <nav
+            className="hidden md:flex items-center gap-8"
+            aria-label="Main Navigation"
           >
-            /
-          </span>
-          <span className="hidden text-xs text-[#666666] md:inline-block truncate">
-            {personal.availabilityNotice}
-          </span>
-        </div>
-
-        {/* Desktop Navigation Links */}
-        <nav
-          className="hidden items-center gap-7 lg:gap-8 md:flex shrink-0"
-          aria-label="Main Navigation"
-        >
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-[#666666] transition-colors hover:text-[#111111] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0245EC] rounded-sm py-1 whitespace-nowrap"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
-
-        {/* Action Button & Mobile Toggle */}
-        <div className="flex items-center gap-3 shrink-0">
-          <a
-            href="#contact"
-            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium tracking-wide uppercase text-[#111111] hover:text-[#0245EC] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0245EC] py-1.5 px-2 rounded-sm"
-          >
-            <span>Get in touch</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-[#0245EC]" aria-hidden="true" />
-          </a>
-
-          {/* Mobile Menu Button */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="inline-flex items-center justify-center p-2 text-[#111111] md:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0245EC] rounded-md"
-            aria-expanded={mobileMenuOpen}
-            aria-label="Toggle navigation menu"
-          >
-            {mobileMenuOpen ? (
-              <X className="h-5 w-5" aria-hidden="true" />
-            ) : (
-              <Menu className="h-5 w-5" aria-hidden="true" />
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="border-b border-[#E5E5E5] bg-white px-4 py-4 md:hidden">
-          <nav className="flex flex-col gap-3" aria-label="Mobile Navigation">
-            <p className="text-xs text-[#666666] mb-1">
-              {personal.availabilityNotice}
-            </p>
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-[#111111] py-2 transition-colors hover:text-[#0245EC]"
+                className="text-sm font-medium text-white/90 hover:text-[#00d2ff] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d2ff] rounded-sm py-1"
               >
                 {link.label}
               </a>
             ))}
-            <div className="pt-3 border-t border-[#E5E5E5] mt-1">
-              <a
-                href="#contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#0245EC] py-1"
-              >
-                <span>Get in touch</span>
-                <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
-              </a>
-            </div>
+
+            {/* Primary Action Button (Reference Pill Button) */}
+            <a
+              href="#contact"
+              className="rounded-full px-5 py-2 text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-[#00d2ff] to-[#0245EC] hover:shadow-[0_4px_15px_rgba(0,210,255,0.4)] hover:-translate-y-0.5 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d2ff]"
+            >
+              Contact
+            </a>
           </nav>
+
+          {/* Mobile: Hamburger toggle */}
+          <div className="flex items-center md:hidden">
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="inline-flex items-center justify-center min-w-[44px] min-h-[44px] p-2 text-white hover:text-[#00d2ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d2ff] rounded-md transition-colors cursor-pointer"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-nav"
+              aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+            >
+              {mobileMenuOpen ? (
+                <X className="h-6 w-6" aria-hidden="true" />
+              ) : (
+                <Menu className="h-6 w-6" aria-hidden="true" />
+              )}
+            </button>
+          </div>
         </div>
+
+        {/* Accessible Mobile Menu Dropdown */}
+        {mobileMenuOpen && (
+          <div
+            id="mobile-nav"
+            className="relative z-50 border-b border-white/10 bg-[#0a0a0a]/95 backdrop-blur-md px-5 py-4 md:hidden animate-in fade-in slide-in-from-top-1 duration-200"
+          >
+            <nav className="flex flex-col space-y-2" aria-label="Mobile Navigation">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={closeMenu}
+                  className="flex items-center min-h-[44px] text-base font-medium text-white/90 hover:text-[#00d2ff] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d2ff] rounded-sm px-1"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <div className="pt-2 border-t border-white/10">
+                <a
+                  href="#contact"
+                  onClick={closeMenu}
+                  className="inline-flex items-center justify-center min-h-[44px] w-full rounded-full px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-[#00d2ff] to-[#0245EC] hover:shadow-[0_4px_15px_rgba(0,210,255,0.4)] transition-all"
+                >
+                  Contact
+                </a>
+              </div>
+            </nav>
+          </div>
+        )}
+      </header>
+
+      {/* Backdrop overlay for mobile menu */}
+      {mobileMenuOpen && (
+        <div
+          onClick={closeMenu}
+          className="fixed inset-0 top-16 bg-black/60 backdrop-blur-sm z-40 md:hidden animate-in fade-in duration-200"
+          aria-hidden="true"
+        />
       )}
-    </header>
+    </>
   );
 }

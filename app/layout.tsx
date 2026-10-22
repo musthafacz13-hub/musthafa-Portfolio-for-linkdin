@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
 export const viewport: Viewport = {
-  themeColor: '#FFFFFF',
+  themeColor: '#0a0a0a',
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
@@ -10,17 +10,17 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: 'Muhammed Musthafa — Junior Web & Mobile App Developer',
+  title: 'Muhammed Musthafa — Full-Stack AI Developer',
   description:
-    'Personal portfolio of Muhammed Musthafa, a degree student and junior web and mobile app developer from Kerala, India. Open to internship opportunities.',
+    'Personal portfolio of Muhammed Musthafa, Full-Stack AI Developer. Building clean, responsive web and mobile applications.',
   authors: [{ name: 'Muhammed Musthafa' }],
   creator: 'Muhammed Musthafa',
   keywords: [
     'Muhammed Musthafa',
+    'Full-Stack AI Developer',
     'Developer Portfolio',
-    'Junior Web Developer',
+    'Web Developer',
     'Mobile App Developer',
-    'Kerala India',
     'React',
     'Next.js',
     'TypeScript',
@@ -28,16 +28,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    title: 'Muhammed Musthafa — Junior Web & Mobile App Developer',
+    title: 'Muhammed Musthafa — Full-Stack AI Developer',
     description:
-      'Personal portfolio of Muhammed Musthafa, a degree student and junior web and mobile app developer from Kerala, India.',
+      'Personal portfolio of Muhammed Musthafa, Full-Stack AI Developer. Building clean, responsive web and mobile applications.',
     siteName: 'Muhammed Musthafa Portfolio',
   },
   twitter: {
     card: 'summary',
-    title: 'Muhammed Musthafa — Junior Web & Mobile App Developer',
+    title: 'Muhammed Musthafa — Full-Stack AI Developer',
     description:
-      'Personal portfolio of Muhammed Musthafa, a degree student and junior web and mobile app developer from Kerala, India.',
+      'Personal portfolio of Muhammed Musthafa, Full-Stack AI Developer. Building clean, responsive web and mobile applications.',
   },
 };
 
@@ -47,9 +47,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="en" className="scroll-smooth bg-[#0a0a0a]" suppressHydrationWarning>
       <body
-        className="min-h-screen bg-white text-[#111111] antialiased selection:bg-[#D9FF3A] selection:text-[#111111] overflow-x-hidden"
+        className="min-h-screen bg-[#0a0a0a] text-white antialiased selection:bg-[#00d2ff] selection:text-[#0a0a0a] overflow-x-hidden font-sans"
         suppressHydrationWarning
       >
         {children}

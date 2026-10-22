@@ -12,34 +12,23 @@ export default function Footer() {
   };
 
   return (
-    <footer className="w-full bg-white py-10 sm:py-12 border-t border-[#E5E5E5]">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6">
-          {/* Identity & Location */}
-          <div>
-            <p className="text-sm font-medium text-[#111111]">
-              {personal.name}
-            </p>
-            <p className="text-xs text-[#666666] mt-0.5">
-              {personal.location} · {personal.role}
-            </p>
-          </div>
+    <footer className="w-full bg-[#050505] py-10 border-t border-white/10 text-center">
+      <div className="mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 max-w-6xl px-5 sm:px-8 lg:px-12">
+        {/* Left: Copyright text */}
+        <p className="text-sm font-normal text-[#a0a0a0]">
+          © {currentYear} {personal.name}. All rights reserved.
+        </p>
 
-          {/* Copyright & Back to Top */}
-          <div className="flex items-center gap-4 sm:gap-6 text-xs text-[#666666]">
-            <span>© {currentYear} {personal.name}</span>
-            <span aria-hidden="true">·</span>
-            <button
-              type="button"
-              onClick={scrollToTop}
-              className="inline-flex items-center gap-1.5 font-medium text-[#111111] hover:text-[#0245EC] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0245EC] py-2 px-1 rounded-sm"
-              aria-label="Scroll back to top of page"
-            >
-              <span>Back to top</span>
-              <ArrowUp className="w-3.5 h-3.5" aria-hidden="true" />
-            </button>
-          </div>
-        </div>
+        {/* Right: Functional Back to top button */}
+        <button
+          type="button"
+          onClick={scrollToTop}
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-[#a0a0a0] hover:text-[#00d2ff] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d2ff] py-1.5 px-2 rounded-sm min-h-[44px] cursor-pointer"
+          aria-label="Scroll back to top of page"
+        >
+          <span>Back to top</span>
+          <ArrowUp className="w-4 h-4" aria-hidden="true" />
+        </button>
       </div>
     </footer>
   );
