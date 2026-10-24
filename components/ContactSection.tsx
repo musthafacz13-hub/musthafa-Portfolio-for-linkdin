@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { PORTFOLIO_CONFIG } from '@/lib/portfolio-data';
-import { Copy, Check, AlertCircle, Mail } from 'lucide-react';
+import { Copy, Check, AlertCircle, Mail, Github, ExternalLink } from 'lucide-react';
 
 export default function ContactSection() {
   const { personal } = PORTFOLIO_CONFIG;
@@ -86,9 +86,10 @@ export default function ContactSection() {
             Get in touch
           </p>
           <p className="text-sm sm:text-base text-[#a0a0a0] mb-8 leading-relaxed">
-            I'm always open to discussing internships, junior developer roles, or project collaborations. Drop me an email anytime.
+            I'm always open to discussing internships, junior developer roles, or project collaborations. Drop me an email or connect on GitHub.
           </p>
 
+          {/* Email Actions */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <a
               href={`mailto:${personal.email}`}
@@ -134,6 +135,21 @@ export default function ContactSection() {
             {copyStatus === 'copied' && 'Email address copied to clipboard'}
             {copyStatus === 'error' && 'Failed to copy email address'}
           </span>
+
+          {/* GitHub Connection Option */}
+          <div className="mt-8 pt-6 border-t border-white/10 flex items-center justify-center">
+            <a
+              href={personal.github.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 rounded-full px-5 py-2.5 text-xs sm:text-sm font-semibold text-white/90 bg-white/5 hover:bg-white/10 border border-white/15 hover:border-[#00d2ff]/50 hover:text-[#00d2ff] transition-all duration-300 min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00d2ff]"
+              aria-label={`Visit Muhammed Musthafa's GitHub profile (@${personal.github.username})`}
+            >
+              <Github className="w-4 h-4 text-[#00d2ff]" aria-hidden="true" />
+              <span>github.com/{personal.github.username}</span>
+              <ExternalLink className="w-3.5 h-3.5 opacity-60" aria-hidden="true" />
+            </a>
+          </div>
         </div>
       </div>
     </section>
